@@ -1,0 +1,6 @@
+alias ls="lsd"
+alias cat="bat"
+alias nq="nvim .config/qtile/config.py"
+alias ni="nvim .config/nvim/init.vim"
+alias n="nvim"
+alias c="clear"
