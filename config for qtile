@@ -1,0 +1,389 @@
+from typing import List  # noqa: F401
+
+from libqtile import bar, layout, widget
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.lazy import lazy
+#from libqtile.utils import guess_terminal
+import os
+
+mod = "mod4"
+terminal = "alacritty" #guess_terminal()
+
+""""
+#PARA TEMA DRACULA (MORADON)
+#colores hechas variables
+enfoque = "#B641DD"
+morado_fuerte = "#580675"
+lila = "#FBF1FF"
+morado1 = "#BE16DF"
+azulito = "#8863FF"
+temperatura = "#CD70FF"
+reloj = "#CF7AFF"
+modo = "#C100FF"
+logo = "#EBAFFF"
+"""
+#PARA TEMA NORD (EL CHIDO)
+#COLORES 
+enfoque1 = "#ECEFF1"
+uno = "#D6DBDF"
+dos = "#AEB6BF"
+tres = "#85929E"
+cuatro = "#5D6D7E"
+cinco = "#34495E"
+seis = "#2E4053"
+siete = "#283747"
+ocho = "#212F3C"
+nueve = "#1B2631"
+letra_negra = "#000000"
+blanco = "#FFFFFF"
+amarillo = "#F1FF63"
+hay = "#FFF863"
+no_hay = "#63FF6D"
+inactivo = "#5D5D5D"
+gris = "#707070"
+activo = "#CFD8DC"
+rojo = "#FF0000"
+logo1 = "#88C0D0"
+
+keys = [
+    # Switch between windows
+    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
+    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "space", lazy.layout.next(),
+        desc="Move window focus to other window"),
+
+    # Move windows between left/right columns or move up/down in current stack.
+    # Moving out of range in Columns layout will create new column.
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
+        desc="Move window to the left"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(),
+        desc="Move window to the right"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(),
+        desc="Move window down"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
+    Key([mod, "control"], "h", lazy.layout.grow_left(),
+        desc="Grow window to the left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(),
+        desc="Grow window to the right"),
+    Key([mod, "control"], "j", lazy.layout.grow_down(),
+        desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+
+    # Toggle between split and unsplit sides of stack.
+    # Split = all windows displayed
+    # Unsplit = 1 window displayed, like Max layout, but still with
+    # multiple stack panes
+    Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
+        desc="Toggle between split and unsplit sides of stack"),
+    Key([mod], "Return", lazy.spawn("alacritty"), desc="abrir terminal"),
+
+    # Toggle between different layouts as defined below
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+
+    Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    #Key([mod], "r", lazy.spawncmd(),
+        #desc="Spawn a command using a prompt widget"),
+    #Para abrir aplicaciones
+    Key([mod],"r", lazy.spawn("rofi -show run"), desc="abrir rofi"),
+    Key([mod],"c", lazy.spawn("google-chrome-stable"), desc="abrir chrome"),
+    Key([mod],"s", lazy.spawn("spotify"), desc="abrir spotify"),
+    Key([mod],"n", lazy.spawn("nemo"), desc="abrir explorador de archivos"),
+    Key([mod],"g", lazy.spawn("gimp-2.99"), desc="abrir gimp"),
+]
+
+#1 es de terminal
+#2 es de biblioteca de archivos
+#3 es de navegador
+#4 es de gimp y para diagramas
+#5 es de musica(spotify)
+#6 es de configuracion de qtile o nvim
+
+groups = [Group(i) for i in[ "", "", "", "", "", "", ]]
+
+for i, group in enumerate(groups):
+    numEsc= str(i+1)
+    keys.extend([
+        # mod1 + letter of group = switch to group
+        Key([mod], numEsc, lazy.group[group.name].toscreen(),
+            desc="Switch to group {}".format(group.name)),
+
+        # mod1 + shift + letter of group = switch to & move focused window to group
+        Key([mod, "shift"], numEsc, lazy.window.togroup(group.name, switch_group=True),
+            desc="Switch to & move focused window to group {}".format(group.name)),
+        # Or, use below if you prefer not to switch to that group.
+        # # mod1 + shift + letter of group = move focused window to group
+        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+        #     desc="move focused window to group {}".format(i.name)),
+    ])
+
+layouts = [
+    layout.Columns(
+        border_focus = enfoque1,
+        border_width=3,
+        margin= 5,
+        change_size=5
+        ),
+    layout.Max(margin=0),
+    # Try more layouts by unleashing below layouts.
+    # layout.Stack(num_stacks=2),
+    # layout.Bsp(),
+    layout.Matrix(
+        border_focus=enfoque1,
+        border_width=3,
+        margin= 5,
+        change_size=5
+    ),
+    layout.MonadTall(
+        border_focus=enfoque1,
+        border_width=3,
+        margin= 5,
+        change_size=5
+    ),
+    layout.MonadWide(
+        border_focus=enfoque1,
+        border_width=3,
+        margin= 5,
+        change_size=5
+    ),
+    #layout.RatioTile(),
+    layout.Tile(
+        border_focus=enfoque1,
+        border_width=3,
+        margin= 5,
+        change_size=5
+
+    ),
+    #layout.TreeTab(),
+    # layout.VerticalTile(),
+    #layout.Zoomy(),
+]
+
+widget_defaults = dict(
+    font='Anonymice Nerd Font',
+    fontsize=13,
+    padding=3,
+)
+extension_defaults = widget_defaults.copy()
+
+# FUNCIONES
+def separador():
+    return widget.Sep(
+        linewidth = 0,
+        padding = 2,
+        foreground=letra_negra,
+        background=letra_negra
+    )
+
+#Para la funcion de los widgets
+# "" Para el inicio
+# "" Para el fin 
+
+def fun_cir(vColor,tipo):
+    if tipo == 0:
+        icono = ""
+    else:
+        icono =  ""
+
+    return widget.TextBox(
+        text = icono,
+        fontsize = 31,
+        foreground = vColor,
+        background = letra_negra,
+        padding = 0,
+    )
+
+def fun_icono(icono,color):
+    return widget.TextBox(
+        text = icono,
+        foreground = letra_negra,
+        background = color,
+        fontsize = 29,
+    )
+
+screens = [
+    Screen(
+        top=bar.Bar(
+            [
+                widget.TextBox(
+                    text = "",
+                    foreground = logo1,
+                    background = letra_negra,
+                    fontsize = 19,
+                    padding = 10,
+                ),
+                separador(),
+                widget.GroupBox(
+                    active = activo,
+                    border_width = 1,
+                    disable_drag = True,
+                    fontsize = 18,
+                    foreground = blanco,
+                    highlight_method ='line',
+                    inactive = inactivo,
+                    margin_x = 0,
+                    margin_y = 5,
+                    other_current_screen_border = siete,
+                    other_screen_border = siete,
+                    padding_x = 8,
+                    padding_y = 5,
+                    this_current_screen_border = uno,
+                    this_screen_border = uno,
+                    urgent_alert_method ='line',
+                    urgent_border = amarillo,
+                ),
+                separador(),
+                separador(),
+                separador(),
+                widget.WindowCount( fmt = ' : {}', font = 'Anonymice Nerd Font' ),
+                widget.Prompt(),
+                widget.Spacer(
+                    length=bar.STRETCH
+                ),
+                separador(),
+#                widget.TaskList(),
+                separador(),
+#                fun_cir(azulito,0),
+                widget.CheckUpdates(
+                    custom_command = "checkupdates",
+                    update_interval = 1800,
+                    display_format = ':{updates}',
+                    padding = 10,
+                    distro = '',
+                    no_update_string = ': no updates',
+                    background = blanco,
+                    execute = "alacritty -e sudo pacman -Syu --noconfirm",
+                    colour_have_updates = hay,
+                    colour_no_updates = no_hay,
+                    fontsize = 16,
+                ),
+#               fun_cir(azulito,1),
+
+                separador(),
+
+#                fun_cir(temperatura,0),
+                fun_icono(" ",uno),
+                widget.ThermalSensor(
+                    foreground = letra_negra,
+                    background = uno,
+                    threshold = 50,
+                    tag_sensor = "core 0",
+                    fmt ='T1:{}',
+                ),
+                fun_icono("| ",uno),
+                widget.Memory(
+                    foreground = letra_negra,
+                    background = uno,
+                ),
+#                fun_cir(temperatura,1),
+                separador(),
+
+                #inicio de widget
+#                fun_cir(reloj,0),
+                widget.Clock(
+                    format ='  %a %I:%M:%S   %d/%m/%Y',
+                    background= tres,
+                    foreground=letra_negra,
+                ),
+#                fun_cir(reloj,1),
+                #fin de widget
+                separador(),
+                widget.Battery(
+                    background = cuatro,
+                    foreground = blanco,
+                    format = ' ({percent:2.0%})',
+                    full_char = '',
+                    low_foreground = amarillo,
+                    low_background = rojo,
+                    charge_char = '',
+                    low_percentage = 0.3,
+                ),
+                separador(),
+#                widget.Backlight(
+#                background = cinco,
+#            ),
+                separador(),
+#                widget.Bluetooth(
+#                background = seis
+#            ), 
+                separador(),
+                widget.QuickExit(
+                    background = ocho,
+                    countdown_format = '{}',
+                    default_text = '襤',
+                    font = 'Anonymice Nerd Font',
+                    foreground = blanco,
+                    mouse_callbacks = {},
+                ),
+                separador(),
+#                fun_cir(modo,0),
+                widget.CurrentLayoutIcon(
+                    background = nueve,
+                    foreground = blanco
+                ),
+                widget.CurrentLayout(
+                    background= nueve,
+                    foreground=blanco,
+                ),
+#                fun_cir(modo,1),
+            ],
+            30,
+        ),
+    ),
+]
+
+# Drag floating layouts.
+mouse = [
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size()),
+    Click([mod], "Button2", lazy.window.bring_to_front())
+]
+
+dgroups_key_binder = None
+dgroups_app_rules = []  # type: List
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
+floating_layout = layout.Floating(float_rules=[
+    # Run the utility of `xprop` to see the wm class and name of an X client.
+    *layout.Floating.default_float_rules,
+    Match(wm_class='confirmreset'),  # gitk
+    Match(wm_class='makebranch'),  # gitk
+    Match(wm_class='maketag'),  # gitk
+    Match(wm_class='ssh-askpass'),  # ssh-askpass
+    Match(title='branchdialog'),  # gitk
+    Match(title='pinentry'),  # GPG key password entry
+])
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
+
+# If things like steam games want to auto-minimize themselves when losing
+# focus, should we respect this or not?
+auto_minimize = True
+
+# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
+# string besides java UI toolkits; you can see several discussions on the
+# mailing lists, GitHub issues, and other WM documentation that suggest setting
+# this string if your java app doesn't work correctly. We may as well just lie
+# and say that we're a working one by default.
+#
+# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
+# java that happens to be on java's whitelist.
+wmname = "QTILE"
+
+cmd = [
+    "feh --bg-fill /home/ricardo/Imágenes/nord.jpeg",
+    "picom --no-vsync &",
+]
+for x in cmd:
+    os.system(x)
