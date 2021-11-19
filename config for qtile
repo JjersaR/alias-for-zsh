@@ -260,7 +260,7 @@ screens = [
                     no_update_string = ': no updates',
                     background = blanco,
                     execute = "alacritty -e sudo pacman -Syu --noconfirm",
-                    colour_have_updates = hay,
+                    colour_have_updates = rojo,
                     colour_no_updates = no_hay,
                     fontsize = 16,
                 ),
