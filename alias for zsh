@@ -1,3 +1,5 @@
+alias nz="nvim .zshrc"
+alias sz="source .zsh"
 alias ls="lsd"
 alias cat="bat"
 alias nq="nvim .config/qtile/config.py"
