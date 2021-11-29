@@ -7,7 +7,7 @@ from libqtile.lazy import lazy
 import os
 
 mod = "mod4"
-terminal = "alacritty" #guess_terminal()
+terminal = "tilix" #guess_terminal()
 
 """"
 #PARA TEMA DRACULA (MORADON)
@@ -81,7 +81,7 @@ keys = [
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack"),
-    Key([mod], "Return", lazy.spawn("alacritty"), desc="abrir terminal"),
+    Key([mod], "Return", lazy.spawn("tilix"), desc="abrir terminal"),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
