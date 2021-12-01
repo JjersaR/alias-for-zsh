@@ -1,4 +1,4 @@
-from typing import List  # noqa: F401
+from typing import List, Text  # noqa: F401
 
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
@@ -96,7 +96,7 @@ keys = [
     Key([mod],"c", lazy.spawn("google-chrome-stable"), desc="abrir chrome"),
     Key([mod],"s", lazy.spawn("spotify"), desc="abrir spotify"),
     Key([mod],"n", lazy.spawn("nemo"), desc="abrir explorador de archivos"),
-    Key([mod],"g", lazy.spawn("gimp-2.99"), desc="abrir gimp"),
+    Key([mod],"v", lazy.spawn("vifm"), desc="abrir vifm"),
 ]
 
 #1 es de terminal
@@ -251,17 +251,23 @@ screens = [
 #                widget.TaskList(),
                 separador(),
 #                fun_cir(azulito,0),
+                widget.TextBox(
+                    text = ': :',
+                    foreground = gris,
+                    background = blanco,
+                    fontsize = 17
+                ),
                 widget.CheckUpdates(
                     custom_command = "checkupdates",
-                    update_interval = 1800,
-                    display_format = ':{updates}',
-                    padding = 10,
-                    distro = '',
-                    no_update_string = ': no updates',
+                    update_interval = 60,
+                    display_format = '{updates}',
+                    padding = 8,
+                    distro = 'Arch',
+                    no_update_string = '0',
                     background = blanco,
-                    execute = "alacritty -e sudo pacman -Syu --noconfirm",
+                    execute = "tilix -e sudo pacman -Syu --noconfirm",
                     colour_have_updates = rojo,
-                    colour_no_updates = no_hay,
+                    colour_no_updates = gris,
                     fontsize = 16,
                 ),
 #               fun_cir(azulito,1),
@@ -377,8 +383,10 @@ auto_minimize = True
 wmname = "QTILE"
 
 cmd = [
-    "feh --bg-fill /home/ricardo/Imágenes/nord.jpeg",
+    "feh --bg-fill /home/ricardo/Descargas/nord.jpeg",
     "picom --no-vsync &",
+    "setxkbmap latam",
 ]
 for x in cmd:
     os.system(x)
+
