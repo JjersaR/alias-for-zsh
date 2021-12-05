@@ -3,8 +3,11 @@ alias sz="source .zsh"
 alias ls="lsd"
 alias cat="bat"
 alias nq="nvim .config/qtile/config.py"
-alias ni="nvim .config/nvim/init.vim"
+alias ni="nvim .config/nvim/init.lua"
 alias n="nvim"
 alias c="clear"
 alias r="ranger"
 alias ll="ls -la"
+alias t="tree"
+
+el tema de oh my zsh es mh
