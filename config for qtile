@@ -9,19 +9,6 @@ import os
 mod = "mod4"
 terminal = "tilix" #guess_terminal()
 
-""""
-#PARA TEMA DRACULA (MORADON)
-#colores hechas variables
-enfoque = "#B641DD"
-morado_fuerte = "#580675"
-lila = "#FBF1FF"
-morado1 = "#BE16DF"
-azulito = "#8863FF"
-temperatura = "#CD70FF"
-reloj = "#CF7AFF"
-modo = "#C100FF"
-logo = "#EBAFFF"
-"""
 #PARA TEMA NORD (EL CHIDO)
 #COLORES 
 enfoque1 = "#ECEFF1"
@@ -93,9 +80,9 @@ keys = [
         #desc="Spawn a command using a prompt widget"),
     #Para abrir aplicaciones
     Key([mod],"r", lazy.spawn("rofi -show run"), desc="abrir rofi"),
-    Key([mod],"c", lazy.spawn("google-chrome-stable"), desc="abrir chrome"),
+    Key([mod],"c", lazy.spawn("chromium"), desc="abrir chromium"),
     Key([mod],"s", lazy.spawn("spotify"), desc="abrir spotify"),
-    Key([mod],"n", lazy.spawn("nemo"), desc="abrir explorador de archivos"),
+    Key([mod],"f", lazy.spawn("pcmanfm"), desc="abrir explorador de archivos"),
     Key([mod],"v", lazy.spawn("vifm"), desc="abrir vifm"),
 ]
 
@@ -168,7 +155,7 @@ layouts = [
 
 widget_defaults = dict(
     font='Anonymice Nerd Font',
-    fontsize=13,
+    fontsize=10,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -205,7 +192,7 @@ def fun_icono(icono,color):
         text = icono,
         foreground = letra_negra,
         background = color,
-        fontsize = 29,
+        fontsize = 15,
     )
 
 screens = [
@@ -216,7 +203,7 @@ screens = [
                     text = "",
                     foreground = logo1,
                     background = letra_negra,
-                    fontsize = 19,
+                    fontsize = 13,
                     padding = 10,
                 ),
                 separador(),
@@ -224,7 +211,7 @@ screens = [
                     active = activo,
                     border_width = 1,
                     disable_drag = True,
-                    fontsize = 18,
+                    fontsize = 13,
                     foreground = blanco,
                     highlight_method ='line',
                     inactive = inactivo,
@@ -250,12 +237,11 @@ screens = [
                 separador(),
 #                widget.TaskList(),
                 separador(),
-#                fun_cir(azulito,0),
                 widget.TextBox(
                     text = ': :',
                     foreground = gris,
                     background = blanco,
-                    fontsize = 17
+                    fontsize = 13
                 ),
                 widget.CheckUpdates(
                     custom_command = "checkupdates",
@@ -268,19 +254,15 @@ screens = [
                     execute = "tilix -e sudo pacman -Syu --noconfirm",
                     colour_have_updates = rojo,
                     colour_no_updates = gris,
-                    fontsize = 16,
+                    fontsize = 13,
                 ),
-#               fun_cir(azulito,1),
-
                 separador(),
-
-#                fun_cir(temperatura,0),
                 fun_icono(" ",uno),
                 widget.ThermalSensor(
                     foreground = letra_negra,
                     background = uno,
                     threshold = 50,
-                    tag_sensor = "core 0",
+                    tag_sensor = "temp1",
                     fmt ='T1:{}',
                 ),
                 fun_icono("| ",uno),
@@ -288,18 +270,12 @@ screens = [
                     foreground = letra_negra,
                     background = uno,
                 ),
-#                fun_cir(temperatura,1),
                 separador(),
-
-                #inicio de widget
-#                fun_cir(reloj,0),
                 widget.Clock(
                     format ='  %a %I:%M:%S   %d/%m/%Y',
                     background= tres,
                     foreground=letra_negra,
                 ),
-#                fun_cir(reloj,1),
-                #fin de widget
                 separador(),
                 widget.Battery(
                     background = cuatro,
@@ -312,13 +288,26 @@ screens = [
                     low_percentage = 0.3,
                 ),
                 separador(),
-#                widget.Backlight(
-#                background = cinco,
-#            ),
+                widget.Backlight(
+                background = cinco,
+                backlight_name = 'acpi_video0',
+                brightness_file = '/sys/class/backlight/intel_backlight',
+                fmt = '{}',
+                format = '{percent:2.0%}',
+                update_interval = 0.2
+            ),
                 separador(),
-#                widget.Bluetooth(
-#                background = seis
-#            ), 
+                widget.Bluetooth(
+                background = seis
+            ),
+                separador(),
+                widget.Wlan(
+                    disconnected_message = '睊',
+                    fmt = {},
+                    format = "{essid} {percent:2.0%}",
+                    interface = 'wlp2s0',
+                    update_interval = 1
+                ),
                 separador(),
                 widget.QuickExit(
                     background = ocho,
@@ -329,13 +318,12 @@ screens = [
                     mouse_callbacks = {},
                 ),
                 separador(),
-#                fun_cir(modo,0),
                 widget.CurrentLayoutIcon(
                     background = nueve,
                     foreground = blanco
                 ),
             ],
-            30,
+            20,
         ),
     ),
 ]
@@ -368,25 +356,14 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 
-# If things like steam games want to auto-minimize themselves when losing
-# focus, should we respect this or not?
 auto_minimize = True
 
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
 wmname = "QTILE"
 
 cmd = [
-    "feh --bg-fill /home/ricardo/Descargas/nord.jpeg",
+    "feh --bg-fill /home/ricardo/Downloads/nord.jpeg",
     "picom --no-vsync &",
     "setxkbmap latam",
 ]
 for x in cmd:
     os.system(x)
-
