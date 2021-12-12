@@ -84,6 +84,19 @@ keys = [
     Key([mod],"s", lazy.spawn("spotify"), desc="abrir spotify"),
     Key([mod],"f", lazy.spawn("pcmanfm"), desc="abrir explorador de archivos"),
 #    Key([mod],"", lazy.spawn(""), desc=""),
+
+    #Control de volumen
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), desc="bajar el volumen"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="subor el volumen"),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"), desc="mutear"),
+
+    #brillo de pantalla
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%"), desc="subir el brillo"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-"), desc="bajar el brillo"),
+
+    #captura de panatalla
+    Key([mod], "s", lazy.spawn("scrot"), desc="tomar captura de pantalla"),
+    Key([mod, "shift"], "s", lazy.spawn("scrot -s"), desc="tomar captura de pantalla en un area"),
 ]
 
 #1 es de terminal
@@ -260,6 +273,8 @@ screens = [
 #               fun_cir(azulito,1),
 
                 separador(),
+                separador(),
+                separador(),
 
 #                fun_cir(temperatura,0),
                 fun_icono(" ",letra_negra),
@@ -276,11 +291,15 @@ screens = [
                     background = letra_negra,
                 ),
                 separador(),
+                separador(),
+                separador(),
                 widget.Clock(
                     format ='  %a %I:%M:%S   %d/%m/%Y',
                     background= letra_negra,
                     foreground= blanco,
                 ),
+                separador(),
+                separador(),
                 separador(),
                 widget.Battery(
                     background = letra_negra,
@@ -293,13 +312,19 @@ screens = [
                     low_percentage = 0.3,
                 ),
                 separador(),
+                separador(),
+                separador(),
 #                widget.Backlight(
 #                background = cinco,
 #            ),
                 separador(),
+                separador(),
+                separador(),
 #                widget.Bluetooth(
 #                background = seis
 #            ), 
+                separador(),
+                separador(),
                 separador(),
                 widget.QuickExit(
                     background = letra_negra,
@@ -309,6 +334,10 @@ screens = [
                     foreground = blanco,
                     mouse_callbacks = {},
                 ),
+                separador(),
+                separador(),
+                separador(),
+                separador(),
                 separador(),
                 widget.CurrentLayoutIcon(
                     background = letra_negra,
