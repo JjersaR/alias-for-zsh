@@ -12,5 +12,6 @@ alias r="ranger"
 alias ll="ls -la"
 alias t="tree"
 alias neo="neofetch"
+alias x="exit"
 
 el tema de oh my zsh es mh
