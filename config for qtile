@@ -76,8 +76,8 @@ keys = [
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    #Key([mod], "r", lazy.spawncmd(),
-        #desc="Spawn a command using a prompt widget"),
+    Key([mod, "control"], "l", lazy.window.toggle_floating(), desc="ventana flotante"),
+    
     #Para abrir aplicaciones
     Key([mod],"r", lazy.spawn("rofi -show run"), desc="abrir rofi"),
     Key([mod],"c", lazy.spawn("google-chrome-stable"), desc="abrir chrome"),
