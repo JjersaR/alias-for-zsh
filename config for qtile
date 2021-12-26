@@ -383,7 +383,7 @@ auto_minimize = True
 wmname = "QTILE"
 
 cmd = [
-    "feh --bg-fill /home/r/Descargas/nord.jpeg",
+    "feh --bg-fill /home/r/Descargas/fondo/nord.jpeg",
     "picom --no-vsync &",
     "setxkbmap latam",
     "network-manager-applet &",
