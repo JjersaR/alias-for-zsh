@@ -108,7 +108,7 @@ __groups = {
     3: Group("", matches=[Match(wm_class=["google-chrome-stable"])]),
     4: Group("甆", matches=[Match(wm_class=["whatsapp-for-linux"])]),
     5: Group("", matches=[Match(wm_class=["libreoffice"])]),
-    6: Group("", matches=[Match(wm_class=["eclipse"])]),
+    6: Group("", matches=[Match(wm_class=["netbeans", "eclipse", "code"])]),
     7: Group("", matches=[Match(wm_class=["spotify"])]),
     8: Group("", matches=[Match(wm_class=["VirtualBox"])]),
 }
@@ -280,13 +280,20 @@ screens = [
                 widget.Spacer(
                     length=bar.STRETCH
                 ),
+                widget.Notify(
+                    action = True,
+                    fmt = '{}',
+                ),
+                separador(),
+                separador(),
+                separador(),
                 widget.CheckUpdates(
                     custom_command = "checkupdates",
                     update_interval = 60,
                     display_format = '{updates}',
                     padding = 8,
                     distro = 'Arch',
-                    no_update_string = '',
+                    no_update_string = 'ﮮ',#'',
                     background =letra_negra,
                     execute = "tilix -e sudo pacman -Syu --noconfirm",
                     colour_have_updates = rojo,
@@ -297,7 +304,7 @@ screens = [
                 separador(),
                 separador(),
                 widget.Clock(
-                    format ='  %a %I:%M     %d/%m/%Y',
+                    format ='  %a %I:%M    %d/%m/%Y',
                     background= letra_negra,
                     foreground= blanco,
                 ),
@@ -310,20 +317,18 @@ screens = [
                     format = ' {percent:2.0%}',
                     full_char = '',
                     low_foreground = rojo,
-                    low_background = nueve,
+                    low_background = letra_negra,
                     charge_char = '',
                     low_percentage = 0.3,
                 ),
                 separador(),
                 separador(),
                 separador(),
-                widget.QuickExit(
-                    background = letra_negra,
-                    countdown_format = '{}',
-                    default_text = '襤',
+                widget.CheckUpdates(
+                    no_update_string = '襤',
+                    execute = "tilix -e shutdown now",
+                    fontsize = 12,
                     font = 'Anonymice Nerd Font',
-                    foreground = blanco,
-                    mouse_callbacks = {},
                 ),
                 separador(),
                 separador(),
@@ -391,3 +396,4 @@ cmd = [
 ]
 for x in cmd:
     os.system(x)
+
