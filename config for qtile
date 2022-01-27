@@ -3,15 +3,16 @@ from typing import List, Text  # noqa: F401
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-#from libqtile.utils import guess_terminal
+
+# from libqtile.utils import guess_terminal
 import os
 
 mod = "mod4"
-terminal = "tilix" #guess_terminal()
+terminal = "tilix"  # guess_terminal()
 
-#PARA TEMA NORD (EL CHIDO)
+# PARA TEMA NORD (EL CHIDO)
 
-#COLORES 
+# COLORES
 enfoque1 = "#ECEFF1"
 uno = "#D6DBDF"
 dos = "#AEB6BF"
@@ -39,67 +40,88 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(),
-        desc="Move window focus to other window"),
-
+    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
-        desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(),
-        desc="Move window to the right"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(),
-        desc="Move window down"),
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(),
-        desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(),
-        desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(),
-        desc="Grow window down"),
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
+    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack"),
+    Key(
+        [mod, "shift"],
+        "Return",
+        lazy.layout.toggle_split(),
+        desc="Toggle between split and unsplit sides of stack",
+    ),
     Key([mod], "Return", lazy.spawn("tilix"), desc="abrir terminal"),
-
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod, "control"], "l", lazy.window.toggle_floating(), desc="ventana flotante"),
-
-    #Para abrir aplicaciones
-    Key([mod],"r", lazy.spawn("rofi -show run"), desc="abrir rofi"),
-    Key([mod],"c", lazy.spawn("google-chrome-stable"), desc="abrir chrome"),
-    Key([mod],"m", lazy.spawn("spotify"), desc="abrir spotify"),
-    Key([mod],"f", lazy.spawn("pcmanfm"), desc="abrir explorador de archivos"),
-    Key([mod],"e", lazy.spawn("eclipse"), desc="abrir eclipse"),
-    Key([mod],"o", lazy.spawn("libreoffice"), desc="abrir office"),
-    Key([mod],"v", lazy.spawn("VirtualBox"), desc="abrir VirtualBox"),
-
-    #Control de volumen
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), desc="bajar el volumen"),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="subor el volumen"),
-    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"), desc="mutear"),
-
-    #brillo de pantalla
+    # Para abrir aplicaciones
+    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="abrir rofi"),
+    Key([mod], "c", lazy.spawn("google-chrome-stable"), desc="abrir chrome"),
+    Key([mod], "m", lazy.spawn("spotify"), desc="abrir spotify"),
+    Key([mod], "f", lazy.spawn("pcmanfm"), desc="abrir explorador de archivos"),
+    Key([mod], "e", lazy.spawn("eclipse"), desc="abrir eclipse"),
+    Key([mod], "g", lazy.spawn("mailspring"), desc="abrir el correo"),
+    # Control de volumen
+    Key(
+        [],
+        "XF86AudioLowerVolume",
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+        desc="bajar el volumen",
+    ),
+    Key(
+        [],
+        "XF86AudioRaiseVolume",
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+        desc="subor el volumen",
+    ),
+    Key(
+        [],
+        "XF86AudioMute",
+        lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+        desc="mutear",
+    ),
+    # brillo de pantalla
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
-
-    #captura de panatalla
-    Key([mod], "s", lazy.spawn("scrot"), desc="tomar captura de pantalla"),
-    Key([mod, "shift"], "s", lazy.spawn("scrot -s"), desc="tomar captura de pantalla en un area"),
+    # captura de panatalla
+    Key(
+        [mod],
+        "s",
+        lazy.spawn("flameshot gui -p /home/r/Capturas"),
+        desc="tomar captura de pantalla",
+    ),
+    Key(
+        [mod, "shift"],
+        "s",
+        lazy.spawn("flameshot screen -n 1 -c"),
+        desc="tomar captura de pantalla en un area",
+    ),
 ]
 
 __groups = {
@@ -108,9 +130,12 @@ __groups = {
     3: Group("", matches=[Match(wm_class=["google-chrome-stable"])]),
     4: Group("甆", matches=[Match(wm_class=["whatsapp-for-linux"])]),
     5: Group("", matches=[Match(wm_class=["libreoffice"])]),
-    6: Group("", matches=[Match(wm_class=["netbeans", "eclipse", "code"])]),
-    7: Group("", matches=[Match(wm_class=["spotify"])]),
-    8: Group("", matches=[Match(wm_class=["VirtualBox"])]),
+    6: Group(
+        "", matches=[Match(wm_class=["code", "discord", "zoom", "teams", "Eclipse"])]
+    ),
+    7: Group("", matches=[Match(wm_class=["mailspring"])]),
+    8: Group("", matches=[Match(wm_class=["spotify"])]),
+    9: Group("", matches=[Match(wm_class=["VirtualBox"])]),
 }
 groups = [__groups[i] for i in __groups]
 
@@ -120,65 +145,47 @@ def get_group_key(name):
 
 
 for i in groups:
-    keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], str(get_group_key(i.name)), lazy.group[i.name].toscreen(),
-            desc="Switch to group {}".format(i.name)),
-
-        # mod1+shift+letter of group = switch to & move focused window to group
-        Key([mod, "shift"], str(get_group_key(i.name)),
-            lazy.window.togroup(i.name, switch_group=True),
-            desc="Switch to & move focused window to group {}".format(i.name)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-        #     desc="move focused window to group {}".format(i.name)),
-    ])
+    keys.extend(
+        [
+            # mod1 + letter of group = switch to group
+            Key(
+                [mod],
+                str(get_group_key(i.name)),
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
+            # mod1+shift+letter of group = switch to & move focused window to group
+            Key(
+                [mod, "shift"],
+                str(get_group_key(i.name)),
+                lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name),
+            ),
+            # Or, use below if you prefer not to switch to that group.
+            # # mod1 + shift + letter of group = move focused window to group
+            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+            #     desc="move focused window to group {}".format(i.name)),
+        ]
+    )
 
 layouts = [
-    layout.Columns(
-        border_focus = enfoque1,
-        border_width=3,
-        margin= 5,
-        change_size=5
-        ),
+    layout.Columns(border_focus=enfoque1, border_width=3, margin=5, change_size=5),
     layout.Max(margin=0),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
-    layout.Matrix(
-        border_focus=enfoque1,
-        border_width=3,
-        margin= 5,
-        change_size=5
-    ),
-    layout.MonadTall(
-        border_focus=enfoque1,
-        border_width=3,
-        margin= 5,
-        change_size=5
-    ),
-    layout.MonadWide(
-        border_focus=enfoque1,
-        border_width=3,
-        margin= 5,
-        change_size=5
-    ),
-    #layout.RatioTile(),
-    layout.Tile(
-        border_focus=enfoque1,
-        border_width=3,
-        margin= 5,
-        change_size=5
-
-    ),
-    #layout.TreeTab(),
+    layout.Matrix(border_focus=enfoque1, border_width=3, margin=5, change_size=5),
+    layout.MonadTall(border_focus=enfoque1, border_width=3, margin=5, change_size=5),
+    layout.MonadWide(border_focus=enfoque1, border_width=3, margin=5, change_size=5),
+    # layout.RatioTile(),
+    layout.Tile(border_focus=enfoque1, border_width=3, margin=5, change_size=5),
+    # layout.TreeTab(),
     # layout.VerticalTile(),
-    #layout.Zoomy(),
+    # layout.Zoomy(),
 ]
 
 widget_defaults = dict(
-    font='Anonymice Nerd Font',
+    font="Anonymice Nerd Font",
     fontsize=13,
     padding=3,
 )
@@ -187,158 +194,167 @@ extension_defaults = widget_defaults.copy()
 # FUNCIONES
 def separador():
     return widget.Sep(
-        linewidth = 0,
-        padding = 2,
-        foreground=letra_negra,
-        background=letra_negra
+        linewidth=0, padding=2, foreground=letra_negra, background=letra_negra
     )
 
-#Para la funcion de los widgets
+
+# Para la funcion de los widgets
 # "" Para el inicio
-# "" Para el fin 
+# "" Para el fin
 
-def fun_cir(vColor,tipo):
+
+def fun_cir(vColor, tipo):
     if tipo == 0:
-        icono = ""
-    else:
-        icono =  ""
+        icono = ""
 
     return widget.TextBox(
-        text = icono,
-        fontsize = 31,
-        foreground = vColor,
-        background = letra_negra,
-        padding = 0,
+        text=icono,
+        fontsize=31,
+        foreground=vColor,
+        background=letra_negra,
+        padding=0,
     )
 
-def fun_icono(icono,color):
+
+def fun_icono(icono, color):
     return widget.TextBox(
-        text = icono,
-        foreground = blanco,
-        background = letra_negra,
-        fontsize = 29,
+        text=icono,
+        foreground=blanco,
+        background=letra_negra,
+        fontsize=29,
     )
+
 
 screens = [
     Screen(
         top=bar.Bar(
             [
                 widget.TextBox(
-                    text = "",
-                    foreground = logo1,
-                    background = letra_negra,
-                    fontsize = 19,
-                    padding = 10,
+                    text="",
+                    foreground=logo1,
+                    background=letra_negra,
+                    fontsize=19,
+                    padding=10,
                 ),
                 separador(),
                 widget.GroupBox(
-                    active = activo,
-                    border_width = 1,
-                    disable_drag = True,
-                    fontsize = 15,
-                    foreground = blanco,
-                    highlight_method ='line',
-                    inactive = inactivo,
-                    margin_x = 0,
-                    margin_y = 5,
-                    other_current_screen_border = siete,
-                    other_screen_border = siete,
-                    padding_x = 8,
-                    padding_y = 5,
-                    this_current_screen_border = uno,
-                    this_screen_border = uno,
-                    urgent_alert_method ='line',
-                    urgent_border = amarillo,
+                    active=activo,
+                    border_width=1,
+                    disable_drag=True,
+                    fontsize=15,
+                    foreground=blanco,
+                    highlight_method="line",
+                    inactive=inactivo,
+                    margin_x=0,
+                    margin_y=5,
+                    other_current_screen_border=siete,
+                    other_screen_border=siete,
+                    padding_x=8,
+                    padding_y=5,
+                    this_current_screen_border=uno,
+                    this_screen_border=uno,
+                    urgent_alert_method="line",
+                    urgent_border=amarillo,
                 ),
                 separador(),
                 separador(),
                 separador(),
-                widget.WindowCount( fmt = ' : {}', font = 'Anonymice Nerd Font' ),
                 widget.Prompt(),
-                widget.Spacer(
-                    length=bar.STRETCH
-                ),
+                widget.Spacer(length=bar.STRETCH),
                 widget.CheckUpdates(
-                    no_update_string = ' ',
-                    execute = "tilix -e nmcli device wifi list",
-                    fontsize = 12,
+                    no_update_string=" ",
+                    execute="tilix -e nmcli device wifi list",
+                    fontsize=14,
+                ),
+                separador(),
+                widget.CheckUpdates(
+                    no_update_string="",
+                    execute="tilix -e bluetoothctl",
+                    fontsize=13,
                 ),
                 separador(),
                 widget.TextBox(
-                    text = "墳",
-                    foreground = blanco,
-                    background = letra_negra,
-                    fontsize = 17,
-                    padding = 8
+                    text="墳",
+                    foreground=blanco,
+                    background=letra_negra,
+                    fontsize=17,
+                    padding=8,
                 ),
                 widget.PulseVolume(
-                    foreground = blanco,
-                    limit_max_volume = True,
-                    fontsize = 13,
+                    foreground=blanco,
+                    limit_max_volume=True,
+                    fontsize=13,
                 ),
                 separador(),
-                widget.Spacer(
-                    length=bar.STRETCH
-                ),
-                widget.Notify(
-                    action = True,
-                    fmt = '{}',
-                ),
+                widget.Spacer(length=bar.STRETCH),
                 separador(),
                 separador(),
                 separador(),
+                #                fun_cir(blanco,0),
                 widget.CheckUpdates(
-                    custom_command = "checkupdates",
-                    update_interval = 60,
-                    display_format = '{updates}',
-                    padding = 8,
-                    distro = 'Arch',
-                    no_update_string = 'ﮮ',#'',
-                    background =letra_negra,
-                    execute = "tilix -e sudo pacman -Syu --noconfirm",
-                    colour_have_updates = rojo,
-                    colour_no_updates = blanco,
-                    fontsize = 16,
+                    custom_command="checkupdates",
+                    update_interval=60,
+                    display_format="ﮮ : {updates}",
+                    padding=8,
+                    distro="Arch",
+                    no_update_string="ﮮ",  #'',
+                    background=letra_negra,
+                    execute="tilix -e sudo pacman -Syu --noconfirm && yay -Syu && sudo dnf upgrade -y && sudo dnf update -y",
+                    colour_have_updates=rojo,
+                    colour_no_updates=blanco,
+                    fontsize=16,
                 ),
+                #                fun_cir(blanco,0),
                 separador(),
                 separador(),
                 separador(),
                 widget.Clock(
-                    format ='  %a %I:%M    %d/%m/%Y',
-                    background= letra_negra,
-                    foreground= blanco,
+                    format="  %a %I:%M    %d/%m/%Y",
+                    background=letra_negra,
+                    foreground=blanco,
                 ),
+                #                fun_cir(blanco,0),
                 separador(),
                 separador(),
                 separador(),
                 widget.Battery(
-                    background = letra_negra,
-                    foreground = blanco,
-                    format = ' {percent:2.0%}',
-                    full_char = '',
-                    low_foreground = rojo,
-                    low_background = letra_negra,
-                    charge_char = '',
-                    low_percentage = 0.3,
+                    background=letra_negra,
+                    foreground=blanco,
+                    format=" {percent:2.0%}",
+                    full_char="",
+                    low_foreground=rojo,
+                    low_background=letra_negra,
+                    charge_char="",
+                    low_percentage=0.3,
                 ),
                 separador(),
                 separador(),
                 separador(),
+                #                fun_cir(blanco,0),
+                widget.QuickExit(
+                    default_text="",
+                    countdown_format="{}",
+                    countdown_start=2,
+                    fmt="{}",
+                    mouse_callbacks={},
+                ),
+                separador(),
+                separador(),
+                separador(),
+                separador(),
+                separador(),
+                #                fun_cir(blanco,0),
                 widget.CheckUpdates(
-                    no_update_string = '襤',
-                    execute = "tilix -e shutdown now",
-                    fontsize = 12,
-                    font = 'Anonymice Nerd Font',
+                    no_update_string="襤",
+                    execute="tilix -e shutdown now",
+                    fontsize=12,
+                    font="Anonymice Nerd Font",
                 ),
+                #                fun_cir(blanco,0),
                 separador(),
                 separador(),
                 separador(),
-                separador(),
-                separador(),
-                widget.CurrentLayoutIcon(
-                    background = letra_negra,
-                    foreground = blanco
-                ),
+                widget.CurrentLayoutIcon(background=letra_negra, foreground=blanco, fontsize = 10),
             ],
             30,
         ),
@@ -347,11 +363,16 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front())
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
+    Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
@@ -359,16 +380,18 @@ dgroups_app_rules = []  # type: List
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
-    # Run the utility of `xprop` to see the wm class and name of an X client.
-    *layout.Floating.default_float_rules,
-    Match(wm_class='confirmreset'),  # gitk
-    Match(wm_class='makebranch'),  # gitk
-    Match(wm_class='maketag'),  # gitk
-    Match(wm_class='ssh-askpass'),  # ssh-askpass
-    Match(title='branchdialog'),  # gitk
-    Match(title='pinentry'),  # GPG key password entry
-])
+floating_layout = layout.Floating(
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *layout.Floating.default_float_rules,
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+    ]
+)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
@@ -388,12 +411,11 @@ auto_minimize = True
 wmname = "QTILE"
 
 cmd = [
-    "feh --bg-fill /home/r/Descargas/fondo/nord.jpeg",
+    "feh --bg-fill /home/r/Descargas/fondo/mountain.jpg",
     "picom --no-vsync &",
     "setxkbmap latam",
     "network-manager-applet &",
-    "blueman-applet &"
+    "blueman-applet &",
 ]
 for x in cmd:
     os.system(x)
-
