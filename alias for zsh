@@ -18,7 +18,7 @@ alias x="exit"
 alias wifi="nmcli device wifi connect"
 alias contra="password"
 alias pdf="apvlv"
-alias actualizar="sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syu && yay -Syu --noconfirm && sudo dnf upgrade -y && sudo dnf update -y"
+alias actualizar="sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && yay -Syu --noconfirm && sudo dnf upgrade -y && sudo dnf update -y"
 alias cache="sudo pacman -Scc --noconfirm && yay -Scc --noconfirm && sudo rm -rf .cache/* && sudo rm -rf /var/log/journal/* "
 
 el tema de oh my zsh es mh
