@@ -20,4 +20,6 @@
                                         
 
 This logo has to be placed in /usr/bin/neofetch 
-and choose which logo to replace to add this
+and choose which logo to replace to add this one,
+then go to .config/neofetch/config.conf to change which 
+logo will be shown, I added the name of 
