@@ -20,6 +20,7 @@ bspc rule -a Mailspring desktop='^4' follow=on
 bspc rule -a  desktop='^5' follow=on
 bspc rule -a gnome-control-center desktop='^6' follow=on
 bspc rule -a Blueberry.py desktop='^6' follow=on
+bspc rule -a org.gnome.Software desktop='^6' follow=on
 
 bspc config top_padding 0
 bspc config left_padding 0
