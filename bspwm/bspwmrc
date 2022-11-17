@@ -23,6 +23,7 @@ bspc rule -a Pcmanfm desktop='^3' follow=on
 bspc rule -a Mailspring desktop='^4' follow=on
 # ESCRITORIO 5
 bspc rule -a Mysql-workbench-bin desktop='^5' follow=on
+bspc rule -a DBeaver desktop='^5' follow=on
 # ESCRITORIO 6
 bspc rule -a gnome-control-center blueberry.py desktop='^6' follow=on
 bspc rule -a Blueberry.py desktop='^6' follow=on
@@ -38,4 +39,4 @@ bspc config bottom_padding 0
 picom &
 compton --restore &
 $HOME/.config/polybar/launch.sh &
-feh --bg-fill /home/r/Descargas/fondo/circle.png &
+feh --bg-fill /home/r/Descargas/fondo/saturno.png &
