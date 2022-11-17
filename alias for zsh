@@ -52,6 +52,9 @@ alias kittyrc="nvim ~/.config/kitty/kitty.conf"
 alias mysqlr="mysql -u root -p"
 alias wichSystem="python3 /usr/bin/wichSystem.py"
 
+# PARA Rofi chido
+export PATH=$HOME/.config/rofi/bin:$PATH
+
 # PENTESTING
 # una funcion de nmap
 function extractPorts(){
