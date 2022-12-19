@@ -5,6 +5,7 @@
 #	copyfile
 #	web-search
 # poetry
+# descarga sdkman para instalar gradle si da problemas
 
 # MIS ALIAS
 alias nz="nvim .zshrc"
