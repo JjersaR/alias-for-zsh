@@ -15,6 +15,13 @@ alt + t
 # program launcher
 alt + d
 	rofi -show drun
+	
+# program launcher
+alt + d
+	~/.config/rofi/launchers/type-4/launcher.sh
+
+ctrl + alt + q
+  ~/.config/rofi/powermenu/type-4/powermenu.sh
 
 alt + w
 	google-chrome-stable
