@@ -14,17 +14,16 @@ alt + t
 
 # program launcher
 alt + d
-	rofi -show drun
-	
-# program launcher
-alt + d
-	~/.config/rofi/launchers/type-4/launcher.sh
+  ~/.config/rofi/launchers/type-1/launcher.sh
 
 ctrl + alt + q
   ~/.config/rofi/powermenu/type-4/powermenu.sh
 
+alt + b
+  /home/r/.config/rofi/scripts/rofi-bluetooth
+
 alt + w
-	google-chrome-stable
+  brave-browser
 
 alt + m
   mailspring
