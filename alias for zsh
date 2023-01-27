@@ -63,6 +63,12 @@ alias Videos=/mnt/Datos/Videos
 alias Datos=/mnt/Datos
 alias Windows=/mnt/Windows
 
+# PARA EL PATH
+export PATH=$PATH:~/.local/share/coursier/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin
+export EDITOR="nvim"
+
 # PENTESTING
 # una funcion de nmap
 function extractPorts(){
