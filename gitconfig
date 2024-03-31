@@ -1,0 +1,13 @@
+[user]
+	name = JjersaR
+	email = rikisj5649@gmail.com
+[core]
+	editor = nvim --wait
+	autocrlf = input
+[init]
+	defaultBranch = main
+[color]
+	ui = true
+[merge]
+  tool = vim_mergetool
+  conflictStyle = diff3
