@@ -1,0 +1,30 @@
+# Volumen arriba
+"bash ~/media_keys.sh volume_up"
+  XF86AudioRaiseVolume
+
+# Volumen abajo
+"bash ~/media_keys.sh volume_down"
+  XF86AudioLowerVolume
+
+# Silenciar
+"bash ~/media_keys.sh mute"
+  XF86AudioMute
+
+# Brillo arriba
+"bash ~/media_keys.sh brightness_up"
+  XF86MonBrightnessUp
+
+# Brillo abajo
+"bash ~/media_keys.sh brightness_down"
+  XF86MonBrightnessDown
+# Captura de pantalla completa
+"flameshot full -c -p /mnt/Datos/Imagenes/Screenshots"
+  Print
+
+# Captura de pantalla gui (con super + Print)
+"flameshot gui"
+  Mod4 + Print
+
+# Captura de pantalla completa con retardo de 5 segundos (super + alt + Print)
+"flameshot full -c -d 5000 -p /mnt/Datos/Imagenes/Screenshots"
+  Mod4 + Mod1 + Print
