@@ -63,4 +63,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 DISABLE_WAYLAND=1
 
-[[ $TERM != "linux" ]] && zellij
+if [ -z "$ZELLIJ" ]; then
+  zellij
+fi
