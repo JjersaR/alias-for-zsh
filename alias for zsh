@@ -1,7 +1,7 @@
 # TEMA robbyrussell
 # MIS PLUGINS ESTO SOLO ES PARA SABER CUALES SON
 # zsh-autosuggestions
-#	ast-syntax-highlighting
+#	fast-syntax-highlighting
 #	copyfile
 #	web-search
 # poetry
@@ -37,8 +37,10 @@ alias bspwmrc="nvim ~/.config/bspwm/bspwmrc"
 alias sxhkdrc="nvim ~/.config/sxhkd/sxhkdrc"
 alias polybar="cd .config/polybar && nvim ~/.config/polybar/config.ini"
 alias kittyrc="nvim ~/.config/kitty/kitty.conf"
-
 alias ..="cd .."
+alias docker="sudo docker"
+alias docker-compose="sudo docker-compose"
+alias zellij="$HOME/Descargas/zellij"
 
 # PARA LAS CARPETAS
 alias Descargas=/mnt/Datos/Descargas
@@ -58,3 +60,7 @@ export EDITOR="nvim"
 
 export JAVA_HOME='/usr/lib/jvm/java-21-openjdk-21.0.4.0.7-2.fc40.x86_64'
 export PATH=$JAVA_HOME/bin:$PATH
+
+DISABLE_WAYLAND=1
+
+[[ $TERM != "linux" ]] && zellij
