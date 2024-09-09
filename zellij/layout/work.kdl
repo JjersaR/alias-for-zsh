@@ -1,0 +1,69 @@
+layout {
+  tab name="nvim" focus=true {
+      pane
+  }
+
+  tab name="term" {
+      pane
+  }
+
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+        format_left   "{mode}#[bg=#181926] {tabs}"
+        format_center ""
+        format_right  ""
+        format_space  ""
+        format_hide_on_overlength "true"
+        format_precedence "crl"
+
+        border_enabled  "false"
+        border_char     "ÔöÇ"
+        border_format   "#[fg=#6C7086]{char}"
+        border_position "top"
+
+        mode_normal        "#[bg=#a6da95,fg=#181926,bold] NORMAL#[bg=#181926,fg=#a6da95]Ôûê"
+        mode_locked        "#[bg=#6e738d,fg=#181926,bold] LOCKED ´Çú#[bg=#181926,fg=#6e738d]Ôûê"
+        mode_resize        "#[bg=#f38ba8,fg=#181926,bold] RESIZE#[bg=#181926,fg=#f38ba8]Ôûê"
+        mode_pane          "#[bg=#89b4fa,fg=#181926,bold] PANE#[bg=#181926,fg=#89b4fa]Ôûê"
+        mode_tab           "#[bg=#b4befe,fg=#181926,bold] TAB#[bg=#181926,fg=#b4befe]Ôûê"
+        mode_scroll        "#[bg=#f9e2af,fg=#181926,bold] SCROLL#[bg=#181926,fg=#f9e2af]Ôûê"
+        mode_enter_search  "#[bg=#8aadf4,fg=#181926,bold] ENT-SEARCH#[bg=#181926,fg=#8aadf4]Ôûê"
+        mode_search        "#[bg=#8aadf4,fg=#181926,bold] SEARCHARCH#[bg=#181926,fg=#8aadf4]Ôûê"
+        mode_rename_tab    "#[bg=#b4befe,fg=#181926,bold] RENAME-TAB#[bg=#181926,fg=#b4befe]Ôûê"
+        mode_rename_pane   "#[bg=#89b4fa,fg=#181926,bold] RENAME-PANE#[bg=#181926,fg=#89b4fa]Ôûê"
+        mode_session       "#[bg=#74c7ec,fg=#181926,bold] SESSION#[bg=#181926,fg=#74c7ec]Ôûê"
+        mode_move          "#[bg=#f5c2e7,fg=#181926,bold] MOVE#[bg=#181926,fg=#f5c2e7]Ôûê"
+        mode_prompt        "#[bg=#8aadf4,fg=#181926,bold] PROMPT#[bg=#181926,fg=#8aadf4]Ôûê"
+        mode_tmux          "#[bg=#f5a97f,fg=#181926,bold] TMUX#[bg=#181926,fg=#f5a97f]Ôûê"
+
+        // formatting for inactive tabs
+        tab_normal              "#[bg=#181926,fg=#89b4fa]Ôûê#[bg=#89b4fa,fg=#1e2030,bold]{index} #[bg=#363a4f,fg=#89b4fa,bold] {name}{floating_indicator}#[bg=#181926,fg=#363a4f,bold]Ôûê"
+        tab_normal_fullscreen   "#[bg=#181926,fg=#89b4fa]Ôûê#[bg=#89b4fa,fg=#1e2030,bold]{index} #[bg=#363a4f,fg=#89b4fa,bold] {name}{fullscreen_indicator}#[bg=#181926,fg=#363a4f,bold]Ôûê"
+        tab_normal_sync         "#[bg=#181926,fg=#89b4fa]Ôûê#[bg=#89b4fa,fg=#1e2030,bold]{index} #[bg=#363a4f,fg=#89b4fa,bold] {name}{sync_indicator}#[bg=#181926,fg=#363a4f,bold]Ôûê"
+
+        // formatting for the current active tab
+        tab_active              "#[bg=#181926,fg=#fab387]Ôûê#[bg=#fab387,fg=#1e2030,bold]{index} #[bg=#363a4f,fg=#fab387,bold] {name}{floating_indicator}#[bg=#181926,fg=#363a4f,bold]Ôûê"
+        tab_active_fullscreen   "#[bg=#181926,fg=#fab387]Ôûê#[bg=#fab387,fg=#1e2030,bold]{index} #[bg=#363a4f,fg=#fab387,bold] {name}{fullscreen_indicator}#[bg=#181926,fg=#363a4f,bold]Ôûê"
+        tab_active_sync         "#[bg=#181926,fg=#fab387]Ôûê#[bg=#fab387,fg=#1e2030,bold]{index} #[bg=#363a4f,fg=#fab387,bold] {name}{sync_indicator}#[bg=#181926,fg=#363a4f,bold]Ôûê"
+
+        // separator between the tabs
+        tab_separator           "#[bg=#181926] "
+
+        // indicators
+        tab_sync_indicator       " ´æâ"
+        tab_fullscreen_indicator " ¾░èô"
+        tab_floating_indicator   " ¾░╣Ö"
+
+        command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+        command_git_branch_format      "#[fg=blue] {stdout} "
+        command_git_branch_interval    "10"
+        command_git_branch_rendermode  "static"
+      }
+    }
+    children
+    pane size=4 {
+      plugin location="zellij:status-bar"
+    }
+  }
+}
