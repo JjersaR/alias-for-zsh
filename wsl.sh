@@ -8,7 +8,7 @@ sudo dnf update -y && sudo dnf upgrade -y
 sudo dnf groupinstall -y 'Development Tools'
 
 # instalar lo necesario
-sudo dnf install -y zsh git wget curl openssl neovim java-21-openjdk java-21-openjdk-devel java-21-openjdk-headless java-21-openjdk-javadoc java-21-openjdk-src maven
+sudo dnf install -y zsh git wget curl openssl neovim java-21-openjdk java-21-openjdk-devel java-21-openjdk-headless java-21-openjdk-javadoc java-21-openjdk-src maven 'dnf-command(config-manager)'
 
 # instalar oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
